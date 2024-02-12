@@ -165,15 +165,18 @@ class PlayList {
     private int minIndex(int start) {
         int min = this.tracks[start].getDuration();
         int imin =0;
-        for (int i = start + 1; i < this.size; i++)
-        {
-            if (min > this.tracks[i].getDuration())
-            {
-                 min = this.tracks[i].getDuration();
-                 imin = i;
-            }
+        if(start>=0 || start>this.size){
+           for (int i = start; i < this.size; i++)
+             {
+                 if (min > this.tracks[i].getDuration())
+                  {
+                       min = this.tracks[i].getDuration();
+                       imin = i;
+                   }
            
+             } 
         }
+        
         return imin;
     }
 
@@ -190,7 +193,7 @@ class PlayList {
      *  rather than returning a new, sorted playlist, the method sorts
      *  the list on which it was called (this list). */
     public void sortedInPlace() {
-        for (int i = 0; i< this.size; i++)
+        for (int i = 0; i < this.size; i++)
         {
             int minI = minIndex(i);
             Track temp = this.tracks[i];
