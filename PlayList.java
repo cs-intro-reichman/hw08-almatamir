@@ -166,10 +166,10 @@ class PlayList {
      *  If start is negative or greater than size - 1, returns -1.
      */
     private int minIndex(int start) {
-        int min = Integer.MAX_VALUE;
+        int min = this.tracks[start].getDuration();
         int imin = 0;
-        if(start >= 0 && start < this.size){
-           for (int i = start; i < this.size; i++)
+        if(start + 1 >= 0 && start + 1 < this.size){
+           for (int i = start + 1; i < this.size; i++)
              {
                  if (min > this.tracks[i].getDuration())
                   {
