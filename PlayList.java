@@ -145,15 +145,18 @@ class PlayList {
      *  If the total size of both lists is too large, does nothing. */
     //// An elegant and terribly inefficient implementation.
      public void add(PlayList other) {
-        if (this.size + other.getSize() <= this.maxSize)
-        {
-            int j = 0;
-            for (int i = this.size; i < this.maxSize; i++)
-            {
-                this.tracks[i] = other.getTrack(j);
-                j++;
-            }
-        }
+        if(this.size + other.getSize() <= maxSize)
+		{
+			int prevsize = this.size;
+			int index = 0;
+			this.size = this.size + other.getSize();
+			for(int i = prevsize ; i < this.size ; i++)
+			{
+				this.tracks[i]=other.getTrack(index);
+				index++;
+			}
+		}
+        this.size += other.size;
     }
 
     /** Returns the index in this list of the track that has the shortest duration,
@@ -164,8 +167,8 @@ class PlayList {
      */
     private int minIndex(int start) {
         int min = this.tracks[start].getDuration();
-        int imin =0;
-        if(start>=0 || start>this.size){
+        int imin =start;
+        if(start >= 0 || start > this.size){
            for (int i = start; i < this.size; i++)
              {
                  if (min > this.tracks[i].getDuration())
