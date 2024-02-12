@@ -168,7 +168,7 @@ class PlayList {
     private int minIndex(int start) {
         int min = this.tracks[start].getDuration();
         int imin =start;
-        if(start >= 0 || start > this.size){
+        if(start >= 0 || start < this.size){
            for (int i = start; i < this.size; i++)
              {
                  if (min > this.tracks[i].getDuration())
@@ -178,9 +178,11 @@ class PlayList {
                    }
            
              } 
+             return imin;
         }
+        return -1;
         
-        return imin;
+        
     }
 
     /** Returns the title of the shortest track in this list. 
